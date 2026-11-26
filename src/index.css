@@ -1,0 +1,518 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.dark select option {
+  background-color: #141418;
+  color: #f4f4f5;
+}
+
+.dark select option:checked,
+.dark select option:hover,
+.dark select option:focus {
+  background-color: #27272f;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Liquid Glass & Chromatic Dispersion Surface System (Light & Dark Paired)
+   Inspired by image_d7edd7b9.png
+   ========================================================================== */
+
+.dash-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(248, 250, 252, 0.68) 100%
+  );
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow:
+    0 12px 34px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.dark .dash-card {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 24, 0.56) 0%,
+    rgba(8, 8, 10, 0.64) 55%,
+    rgba(14, 14, 18, 0.58) 100%
+  );
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dash-glass-pill {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(244, 246, 250, 0.76) 100%
+  );
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.dark .dash-glass-pill {
+  background: linear-gradient(
+    135deg,
+    rgba(24, 24, 28, 0.62) 0%,
+    rgba(10, 10, 12, 0.72) 100%
+  );
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dash-inset {
+  background-color: rgba(15, 23, 42, 0.035);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.dark .dash-inset {
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Circular Monochrome Icon Badge (matching reference circular icons) */
+.dash-icon-circle {
+  background-color: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  color: #0f172a;
+}
+
+.dark .dash-icon-circle {
+  background-color: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* Apple VisionOS-Style Liquid Glass Card Specular Spotlight */
+.apple-card-spotlight {
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 320ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.apple-card-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.12) 45%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .apple-card-spotlight::before {
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.035) 42%,
+    transparent 74%
+  );
+}
+
+.apple-card-spotlight:hover::before {
+  opacity: 1;
+}
+
+.dark .apple-card-spotlight:hover {
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.78),
+    0 0 28px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.apple-card-spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Apple-Inspired Spring Micro-Animations for Liquid Glass Icon Badges */
+.apple-icon-badge {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 420ms cubic-bezier(0.22, 1.36, 0.36, 1),
+    background-color 280ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 280ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 360ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.apple-icon-badge::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 65%
+  );
+  transform: translateX(-115%) rotate(12deg);
+  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.group\/kpi:hover .apple-icon-badge {
+  transform: scale(1.04);
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+.dark .group\/kpi:hover .apple-icon-badge {
+  border-color: rgba(255, 255, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.apple-icon-badge:hover {
+  transform: scale(1.1) translateY(-1px) !important;
+  border-color: rgba(15, 23, 42, 0.26) !important;
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .apple-icon-badge:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.42) !important;
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.16),
+    0 6px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.apple-icon-badge:hover::after {
+  transform: translateX(115%) rotate(12deg);
+}
+
+.apple-icon-badge:active {
+  transform: scale(0.96) !important;
+  transition-duration: 140ms;
+}
+
+/* Individual SF-Symbol-Style Icon Geometry Transitions */
+.apple-icon-badge svg {
+  transition: transform 420ms cubic-bezier(0.22, 1.36, 0.36, 1);
+}
+
+.apple-icon-badge .icon-layer-top,
+.apple-icon-badge .icon-layer-mid,
+.apple-icon-badge .icon-layer-bot,
+.apple-icon-badge .icon-clock-hour,
+.apple-icon-badge .icon-clock-min,
+.apple-icon-badge .icon-check-mark,
+.apple-icon-badge .icon-trend-path,
+.apple-icon-badge .icon-calc-accent {
+  transition:
+    transform 460ms cubic-bezier(0.22, 1.36, 0.36, 1),
+    opacity 320ms ease;
+}
+
+.apple-icon-badge:hover .icon-layer-top,
+.group\/kpi:hover .apple-icon-badge .icon-layer-top {
+  transform: translateY(-1.6px);
+}
+
+.apple-icon-badge:hover .icon-layer-mid,
+.group\/kpi:hover .apple-icon-badge .icon-layer-mid {
+  transform: translateY(-0.15px);
+}
+
+.apple-icon-badge:hover .icon-layer-bot,
+.group\/kpi:hover .apple-icon-badge .icon-layer-bot {
+  transform: translateY(1.35px);
+}
+
+.apple-icon-badge .icon-clock-hour,
+.apple-icon-badge .icon-clock-min {
+  transform-origin: 12px 12px;
+}
+
+.group\/kpi:hover .apple-icon-badge .icon-clock-min {
+  transform: rotate(22deg);
+}
+
+.group\/kpi:hover .apple-icon-badge .icon-clock-hour {
+  transform: rotate(6deg);
+}
+
+.apple-icon-badge:hover .icon-clock-min {
+  transform: rotate(45deg);
+}
+
+.apple-icon-badge:hover .icon-clock-hour {
+  transform: rotate(12deg);
+}
+
+.apple-icon-badge .icon-check-mark {
+  transform-origin: 12px 12px;
+  stroke-dasharray: 14;
+  stroke-dashoffset: 0;
+}
+
+.group\/kpi:hover .apple-icon-badge .icon-check-mark {
+  transform: scale(1.08);
+}
+
+.apple-icon-badge:hover .icon-check-mark {
+  animation: appleCheckPulse 520ms cubic-bezier(0.22, 1.36, 0.36, 1) forwards;
+}
+
+.apple-icon-badge .icon-trend-path {
+  transform-origin: 12px 12px;
+}
+
+.group\/kpi:hover .apple-icon-badge .icon-trend-path {
+  transform: translate(0.75px, -0.75px) scale(1.03);
+}
+
+.apple-icon-badge:hover .icon-trend-path {
+  transform: translate(1.3px, -1.4px) scale(1.06);
+}
+
+.group\/kpi:hover .apple-icon-badge .icon-calc-accent,
+.apple-icon-badge:hover .icon-calc-accent {
+  transform: translateY(-0.8px) scale(1.05);
+}
+
+@keyframes appleCheckPulse {
+  0% {
+    stroke-dashoffset: 14;
+    transform: scale(0.92);
+  }
+  65% {
+    stroke-dashoffset: 0;
+    transform: scale(1.16);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apple-card-spotlight,
+  .apple-card-spotlight::before,
+  .apple-icon-badge,
+  .apple-icon-badge::after,
+  .apple-icon-badge svg,
+  .apple-icon-badge * {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Featured Summary Glass Card (Pure Refractive Obsidian Glass) */
+.dash-hero-glass {
+  background: linear-gradient(145deg, #111114 0%, #1d1d22 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dark .dash-hero-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(28, 28, 34, 0.65) 0%,
+    rgba(10, 10, 12, 0.78) 100%
+  );
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+/* Active Segmented Filter Pill */
+.dash-nav-pill-active {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  color: #09090b;
+}
+
+.dark .dash-nav-pill-active {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Primary Action Pill (Crystal White in Dark Mode / Pitch Obsidian in Light Mode) */
+.dash-cobalt-btn {
+  background: #09090b;
+  color: #ffffff;
+  border: 1px solid rgba(9, 9, 11, 0.9);
+  box-shadow: 0 8px 20px rgba(9, 9, 11, 0.16);
+}
+
+.dash-cobalt-btn:hover {
+  background: #18181b;
+}
+
+.dark .dash-cobalt-btn {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+  color: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 8px 24px rgba(255, 255, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.dark .dash-cobalt-btn:hover {
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(255, 255, 255, 0.22);
+}
+
+.dash-modal {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.76) 0%,
+    rgba(244, 246, 250, 0.64) 55%,
+    rgba(255, 255, 255, 0.72) 100%
+  );
+  backdrop-filter: blur(36px) saturate(185%);
+  -webkit-backdrop-filter: blur(36px) saturate(185%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 28px 72px rgba(15, 23, 42, 0.18),
+    0 2px 10px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.06);
+}
+
+.dark .dash-modal {
+  background: linear-gradient(
+    145deg,
+    rgba(32, 32, 40, 0.48) 0%,
+    rgba(12, 12, 16, 0.58) 52%,
+    rgba(22, 22, 28, 0.5) 100%
+  );
+  backdrop-filter: blur(42px) saturate(195%);
+  -webkit-backdrop-filter: blur(42px) saturate(195%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 36px 96px rgba(0, 0, 0, 0.78),
+    0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 0 32px rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle Contour Glow for Brand Wordmark (white/silver ink PNG) */
+.logo-glow {
+  filter: invert(1) drop-shadow(0 0 6px rgba(15, 23, 42, 0.14));
+  transition: filter 0.2s ease;
+}
+
+.dark .logo-glow {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.42))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.22))
+    drop-shadow(0 0 20px rgba(255, 255, 255, 0.12));
+}
+
+.group:hover .logo-glow {
+  filter: invert(1) drop-shadow(0 0 8px rgba(15, 23, 42, 0.2));
+}
+
+.dark .group:hover .logo-glow {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 0 13px rgba(255, 255, 255, 0.32))
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.16));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 170, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(161, 161, 170, 0.5);
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

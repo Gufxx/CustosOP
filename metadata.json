@@ -1,0 +1,6 @@
+{
+  "name": "CustosOP — Gestão de Custos por Ordem de Produção",
+  "description": "Sistema contábil brasileiro para gestão e acumulação de custos por ordem de produção (encomenda), com lançamentos de MD, MOD, critérios de rateio de CIF, razonetes esquemáticos em T, encerramento de lotes e apuração de resultados com DRE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
