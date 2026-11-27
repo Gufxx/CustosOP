@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Check, ChevronDown, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ProductionOrder, OrderStatus } from '../types/costing';
 
 const ORDER_STATUS_OPTIONS: Array<{
@@ -98,7 +99,7 @@ export function AddOrderModal({
     setIsStatusMenuOpen(false);
   }, [orderToEdit, isOpen]);
 
-  if (!isOpen) return null;
+  const shouldReduceMotion = useReducedMotion();
 
   const selectedStatusOption =
     ORDER_STATUS_OPTIONS.find((opt) => opt.value === status) || ORDER_STATUS_OPTIONS[0];
@@ -129,8 +130,34 @@ export function AddOrderModal({
   const labelClass = 'block font-semibold text-slate-700 dark:text-zinc-200 mb-1.5';
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/35 dark:bg-black/45 backdrop-blur-md flex items-center justify-center p-4 print:hidden">
-      <div className="dash-modal rounded-[28px] max-w-lg w-full overflow-visible relative">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.2 }}
+          className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/35 dark:bg-black/45 backdrop-blur-md flex items-center justify-center p-4 print:hidden"
+        >
+          <motion.div
+            initial={
+              shouldReduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, scale: 0.95, y: 14, filter: 'blur(6px)' }
+            }
+            animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+            exit={
+              shouldReduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, scale: 0.96, y: 8, filter: 'blur(4px)' }
+            }
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.01 }
+                : { type: 'spring', stiffness: 360, damping: 28, mass: 0.82 }
+            }
+            className="dash-modal rounded-[28px] max-w-lg w-full overflow-visible relative"
+          >
         <button
           type="button"
           onClick={onClose}
@@ -379,7 +406,9 @@ export function AddOrderModal({
             </button>
           </div>
         </form>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

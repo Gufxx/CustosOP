@@ -1,6 +1,15 @@
 import { BookOpen } from 'lucide-react';
 
-export type AppTab = 'orders' | 'cif' | 'taccounts' | 'dre';
+export type AppTab =
+  | 'overview'
+  | 'orders'
+  | 'cif'
+  | 'taccounts'
+  | 'dre'
+  | 'ir'
+  | 'goals'
+  | 'cashflow'
+  | 'export';
 
 interface HeaderProps {
   activeTab: AppTab;
@@ -9,10 +18,15 @@ interface HeaderProps {
 }
 
 const NAV_ITEMS: { id: AppTab; label: string }[] = [
+  { id: 'overview', label: 'Painel 3D' },
   { id: 'orders', label: 'Ordens' },
   { id: 'cif', label: 'Rateio CIF' },
   { id: 'taccounts', label: 'Razonetes' },
   { id: 'dre', label: 'DRE' },
+  { id: 'ir', label: 'Declaração IR' },
+  { id: 'goals', label: 'Metas & Orçamentos' },
+  { id: 'cashflow', label: 'Entradas & Saídas' },
+  { id: 'export', label: 'Exportar PDF' },
 ];
 
 export function Header({
@@ -31,7 +45,7 @@ export function Header({
           aria-label="CustosOP — Início"
         >
           <img
-            src="/assets/aistudio/Custos_op_logo_17896c45.png"
+            src="/assets/custosop-logo.png"
             alt="CustosOP"
             referrerPolicy="no-referrer"
             className="h-[76px] w-auto max-w-none -ml-0.5 select-none pointer-events-none logo-glow"

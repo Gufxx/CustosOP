@@ -3,6 +3,7 @@ import {
   BookOpen,
   ArrowRight,
 } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
 interface TheoryGuideModalProps {
   isOpen: boolean;
@@ -10,11 +11,37 @@ interface TheoryGuideModalProps {
 }
 
 export function TheoryGuideModal({ isOpen, onClose }: TheoryGuideModalProps) {
-  if (!isOpen) return null;
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/35 dark:bg-black/45 backdrop-blur-md flex items-center justify-center p-4 print:hidden">
-      <div className="dash-modal rounded-[28px] max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden relative">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: shouldReduceMotion ? 0.01 : 0.2 }}
+          className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/35 dark:bg-black/45 backdrop-blur-md flex items-center justify-center p-4 print:hidden"
+        >
+          <motion.div
+            initial={
+              shouldReduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, scale: 0.95, y: 14, filter: 'blur(6px)' }
+            }
+            animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+            exit={
+              shouldReduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, scale: 0.96, y: 8, filter: 'blur(4px)' }
+            }
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.01 }
+                : { type: 'spring', stiffness: 360, damping: 28, mass: 0.82 }
+            }
+            className="dash-modal rounded-[28px] max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden relative"
+          >
         <button
           type="button"
           onClick={onClose}
@@ -204,7 +231,9 @@ export function TheoryGuideModal({ isOpen, onClose }: TheoryGuideModalProps) {
             Entendido / Fechar Guia
           </button>
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

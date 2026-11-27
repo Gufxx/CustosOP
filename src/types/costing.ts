@@ -138,3 +138,59 @@ export interface OrderCostSummary {
   grossProfit: number;
   grossMarginPercent: number;
 }
+
+export type GoalMetricType =
+  | 'receita_bruta'
+  | 'lucro_operacional'
+  | 'margem_bruta'
+  | 'saldo_caixa'
+  | 'ordens_faturadas'
+  | 'personalizado';
+
+export interface FinancialGoal {
+  id: string;
+  title: string;
+  category: string;
+  metricType: GoalMetricType;
+  targetValue: number;
+  manualCurrentValue?: number;
+  unit: 'brl' | 'percent' | 'count';
+  deadline: string;
+}
+
+export type BudgetSourceKey =
+  | 'md'
+  | 'mod'
+  | 'cif'
+  | 'comercial'
+  | 'administrativa'
+  | 'personalizado';
+
+export interface BudgetAllocation {
+  id: string;
+  title: string;
+  sourceKey: BudgetSourceKey;
+  plannedAmount: number;
+  manualActualAmount?: number;
+  periodLabel: string;
+}
+
+export type CashFlowPaymentMethod =
+  | 'PIX'
+  | 'Boleto'
+  | 'Transferência TED'
+  | 'Cartão Corporativo'
+  | 'Débito Automático';
+
+export interface CashFlowEntry {
+  id: string;
+  type: 'entrada' | 'saida';
+  date: string;
+  description: string;
+  category: string;
+  amount: number;
+  status: 'realizado' | 'previsto';
+  paymentMethod: CashFlowPaymentMethod;
+  linkedOrderCode?: string;
+}
+
